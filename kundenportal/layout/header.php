@@ -13,4 +13,9 @@
 
 <?php include_once 'login-form.php'; ?>
 
-<pre><?php print_r($_SESSION); ?></pre>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3 col-md-4 col-sm-12 bg-light">
+			sidebar
+		</div>
+		<div class="col-lg-9 col-md-8 col-sm-12">
