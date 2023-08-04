@@ -3,11 +3,12 @@
 	<div class="container">
 		<div class="row justify-content-end">
 			<div class="col-lg-2 col-md-3 col-sm-3 text-end">
-				<a href="/kundenportal/profile/" class="smart_link">
+				<a href="/kundenportal/contact_profile/" class="smart_link">
+					<i class="fa fa-user-o" aria-hidden="true"></i>
 					<?php echo $B24_CONTACT->data['UF_USER_LOGIN'];?>
 				</a>
 				<form action="" method="post" class="d-inline">
-					<button class="btn btn-outline-primary border-white" title="logout" name="contact_logout" value="Y">
+					<button class="btn btn-lg btn-outline-primary border-white" title="logout" name="contact_logout" value="Y">
 						<i class="fa fa-sign-out" aria-hidden="true"></i>
 					</button>
 				</form>

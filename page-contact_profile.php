@@ -95,7 +95,4 @@
 	</div>
 </form>
 
-<pre><?php print_r($_POST); ?></pre>
-<pre><?php print_r($B24_CONTACT); ?></pre>
-
 <?php include_once 'kundenportal/layout/footer.php'; ?>
