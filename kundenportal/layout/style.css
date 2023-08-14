@@ -11,3 +11,8 @@
 .smart_link {
 	text-decoration: none;
 }
+
+.google_search-preloader {
+	max-height: 300px;
+	overflow-y: scroll;
+}
