@@ -8,25 +8,31 @@
 			<span class="placeholder col-5 bg-secondary placeholder-lg"></span>
 			<span class="placeholder col-10 bg-secondary placeholder-lg"></span>
 			<hr>
+		</p>
+		<p class="placeholder-glow">
 			<span class="placeholder col-5 bg-secondary placeholder-lg"></span>
 			<span class="placeholder col-10 bg-secondary placeholder-lg"></span>
 			<hr>
+		</p>
+		<p class="placeholder-glow">
 			<span class="placeholder col-5 bg-secondary placeholder-lg"></span>
 			<span class="placeholder col-10 bg-secondary placeholder-lg"></span>
 			<hr>
+		</p>
+		<p class="placeholder-glow">
 			<span class="placeholder col-5 bg-secondary placeholder-lg"></span>
 			<span class="placeholder col-10 bg-secondary placeholder-lg"></span>
+			<hr>
 		</p>
 	</div>
-	<div v-else="!searchPreloader && list" class="border p-2 google_search-preloader">
+	<div v-else="!searchPreloader && list" class="border google_search-preloader">
 		<div v-for="(item, index) in list">
 			<div>{{item.name}}</div>
 			<div>{{item.address}}</div>
 			<hr>
 		</div>
 	</div>
-	
-
+<hr>
 	<pre>{{searchProcess}}</pre>
 	<pre>{{text}}</pre>
 	

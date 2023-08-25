@@ -14,5 +14,5 @@
 
 .google_search-preloader {
 	max-height: 300px;
-	overflow-y: scroll;
+	overflow-y: auto;
 }

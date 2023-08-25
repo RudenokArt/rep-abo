@@ -6,8 +6,9 @@
 class Outscraper {
 	
 	function __construct() {
+		global $outscraperApiKey;
 		$this->apiUrl = 'https://api.app.outscraper.com/';
-		$this->apiKey = 'YXV0aDB8NjM3ZTUwMzllYzcyNWIzYTg2OWRkNWE3fGY4Yzk0NjVlZjI';
+		$this->apiKey = $outscraperApiKey;
 		
 	}
 
