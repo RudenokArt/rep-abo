@@ -12,7 +12,24 @@
 	text-decoration: none;
 }
 
-.google_search-preloader {
+.google_search-dropdown-wrapper {
+	position: relative;
+	width: 100%;
+}
+
+.google_search-dropdown {
 	max-height: 300px;
 	overflow-y: auto;
+	position: absolute;
+	top:0;
+	left: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+.google_search-dropdown-item {
+	cursor: pointer;
+}
+.google_search-dropdown-item:hover {
+	background-color: rgba(250, 250, 250, 1.0);
 }

@@ -1,7 +1,12 @@
 <div class="border-bottom p-3"></div>
 <div class="border-bottom">
+	<a href="/kundenportal/new_review/" class="btn btn-lg btn-outline-primary w-100 border-light">
+		Neue Rezension
+	</a>
+</div>
+<div class="border-bottom">
 	<a href="#" class="btn btn-lg btn-outline-primary w-100 border-light">
-		Current Reviews
+		Aktuelle Bewertungen
 	</a>
 </div>
 <div class="border-bottom">
