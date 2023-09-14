@@ -80,8 +80,89 @@
 		</p>
 	</div>
 	<div v-if="outscraperResponse && !outscraperPreloader">
-		{{outscraperResponse}}
+			<div class="pt-5">
+		<div class="card">
+			<div class="card-header">
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-12 text-center">
+						<img v-bind:src="outscraperData.logo" width="200" alt="">
+					</div>
+					<div class="col-lg-8 col-md-8 col-sm-12">
+						<div>
+							<a v-bind:href="outscraperData.site" target="_blank" class="text-decoration-none">
+								<b>{{outscraperData.name}}</b>
+								{{outscraperData.country}}
+								{{outscraperData.city}}
+							</a>	
+						</div>
+						<div>{{outscraperData.street}}</div>
+						<div>{{outscraperData.phone}}</div>
+						<div>{{outscraperData.site}}</div>
+						<div>{{outscraperData.full_address}}</div>
+					</div>
+					
+				</div>
+				<div>{{outscraperData.query}}</div>
+			</div>
+			<div class="card-body">
+				<div class="row pt-3" v-for="item, index in outscraperData.reviews_data">
+
+					<div class="col-lg-3 col-md-3 col-sm-12">
+						<img v-bind:src="item.author_image" alt="" class="h-100"><br>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12">
+						{{item.review_id}}<br>
+						{{item.author_title}}<br>
+						<span v-for="num in 5" class="text-warning">
+							<template v-if="num <= item.review_rating">
+								<i class="fa fa-star" aria-hidden="true"></i>
+							</template>
+							<template v-else="num > item.review_rating">
+								<i class="fa fa-star-o" aria-hidden="true"></i>
+							</template>
+						</span>
+						<span v-if="item.review_rating">
+							({{item.review_rating}})
+						</span>
+						<br>
+						<a v-bind:href="item.review_link" target="_blank">In der Quelle</a><br>
+					</div>
+
+					<div class="col-lg-3 col-md-3 col-sm-12">
+						<div class="form-check">
+							<label class="form-check-label">
+								<input class="form-check-input" type="checkbox" v-bind:value="item.review_id" name="need" v-on:change="needAndReasonsSet">
+								Zum Löschen senden
+							</label>
+						</div>
+						<div class="pt-2" v-if="need.includes(item.review_id)">
+							<select class="form-select" name="reasons" v-on:change="needAndReasonsSet">
+								<option value="-" selected>Select reason</option>
+								<option value="No text">No text</option>
+								<option value="Fake name">Fake name</option>
+								<option value="Bullshit">Bullshit</option>
+								<option value="Spam">Spam</option>
+								<option value="Offense">Offense</option>
+								<option value="Unacceptable content">Unacceptable content</option>
+								<option value="Advertisement">Advertisement</option>
+								<option value="Other">Other</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-12 border-bottom pb-3">
+						{{item.review_text}}<br>
+					</div>
+				</div>
+				<div class="text-center pt-5 pb-5">
+					<button class="w-75 btn-lg btn-primary" v-on:click="taskAddFromSite">Send</button>
+				</div>
+			</div>
+		</div>
 	</div>
+	</div>
+
+
+
 
 </div>
 
@@ -101,8 +182,15 @@
 				googleText: '',
 				outscraperResponse: false,
 				outscraperPreloader: false,
+				outscraperData: false,
+				need: [],
+				reasons: [],
 			};
 		},
+
+		// mounted: async function (){
+		// 	this.outscraperData = await this.getTestReviews();
+		// },
 
 		watch: {
 			searchProcess: function () {
@@ -114,11 +202,55 @@
 
 		methods: {
 
+			taskAddFromSite: async function () {
+				var response = await $.post(this.ajaxUrl, {
+					taskAddFromSite: 'Y',
+					company: this.outscraperData,
+					need: JSON.stringify(this.need),
+					reasons: JSON.stringify(this.reasons),
+					price: 100, 
+					amount: 300,
+					uName: 'contactName',
+					uPhone: '55-555-555',
+					uEmail: 'email@mail.ru',
+				});
+				console.log(response);
+			},
+
+
+
+			needAndReasonsSet: function () {
+				this.reasons = [];
+				this.need = [];
+				var arr1 = $('input[name="need"]');
+				for (var i = 0; i < arr1.length; i++) {
+					if (arr1[i].checked) {
+						this.need.push(arr1[i].value);
+					}
+				}
+				var instance = this;
+				setTimeout(function () {
+					var arr = $('select[name="reasons"]');
+					for (var i = 0; i < arr.length; i++) {
+						instance.reasons.push(arr[i].value);
+					}
+				}, 100);
+				
+			},
+
+			getTestReviews: async function () {
+				var re = await $.get(this.ajaxUrl+'?test=Y');
+				var re1 = JSON.parse(re);
+				var re2 = re1.result.result;
+				return re2[0];
+			},
+
 			requestOutscraper: async function (e) {
 				this.outscraperPreloader = true;
 				console.log(this.ajaxUrl);
 				var jsonStr = await $.post(this.ajaxUrl, $(e.target).serialize(), function () {});
 				this.outscraperResponse = JSON.parse(jsonStr);
+				this.outscraperData = this.outscraperResponse.result.result[0];
 				this.outscraperPreloader = false;
 			},
 
