@@ -33,3 +33,25 @@
 .google_search-dropdown-item:hover {
 	background-color: rgba(250, 250, 250, 1.0);
 }
+
+.preloader-layer {
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.2);
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	z-index: 100;
+	display: none;
+}
+.preloader {
+	margin: auto;
+}
+
+.remaing_rewiews {
+	position: fixed;
+	bottom:0;
+	left: 0;
+	height: auto;
+	width: 100vw;
+}

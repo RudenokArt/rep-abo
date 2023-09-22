@@ -8,9 +8,7 @@ class B24_Greviews extends B24_Class {
 	function taskAddFromSite () {
 		global $b24_webhook;
 		$api_method = 'greviews.task.addFromSite';
-
 		$url = $b24_webhook.$api_method;
-
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, $url);
 		curl_setopt($curl, CURLOPT_POST, 1);
@@ -27,8 +25,19 @@ class B24_Greviews extends B24_Class {
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		$response = curl_exec($curl);
 		curl_close($curl);
+		$result = json_decode($response, true);
+		return $result['result'];
+	}
 
-		return $response;
+	function relationsAdd () {
+		global $b24_webhook;
+		$api_method = 'grewiewscontacts.relations_add?'; 
+		$api_query = http_build_query([
+			'greviews_id' => $_POST['greviews_id'],
+			'contact_id' => $_POST['contact_id'],
+		]);
+		$json = file_get_contents($b24_webhook.$api_method.$api_query);
+		return $json;
 	}
 
 	function taskAdd () {
@@ -39,7 +48,6 @@ class B24_Greviews extends B24_Class {
 		]);
 
 		// $json = file_get_contents($b24_webhook.$api_method.$api_query);
-
 		// file_put_contents($_SERVER['DOCUMENT_ROOT'].'/log.json', $json);
 
 		$json = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/log.json');

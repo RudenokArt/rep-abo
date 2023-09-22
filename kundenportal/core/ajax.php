@@ -20,4 +20,9 @@ if (isset($_REQUEST['taskAdd']) and isset($_REQUEST['googleId'])) {
 if (isset($_REQUEST['taskAddFromSite'])) {
 	echo (new B24_Greviews())->taskAddFromSite();
 }
+
+if (isset($_REQUEST['relationsAdd'])) {
+	echo (new B24_Greviews())->relationsAdd();
+}
+
 ?>
