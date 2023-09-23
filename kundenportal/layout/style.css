@@ -55,3 +55,7 @@
 	height: auto;
 	width: 100vw;
 }
+
+.detail-page-link:hover {
+ background-color: rgba(0, 0, 200, 0.1);
+}

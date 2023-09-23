@@ -5,12 +5,7 @@
 	</a>
 </div>
 <div class="border-bottom">
-	<a href="#" class="btn btn-lg btn-outline-primary w-100 border-light">
-		Aktuelle Bewertungen
-	</a>
-</div>
-<div class="border-bottom">
-	<a href="#" class="btn btn-lg btn-outline-primary w-100 border-light">
+	<a href="rewiews_in_removal" class="btn btn-lg btn-outline-primary w-100 border-light">
 		Bewertungen in Entfernung
 	</a>
 </div>

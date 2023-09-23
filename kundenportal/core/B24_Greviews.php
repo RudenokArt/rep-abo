@@ -40,6 +40,37 @@ class B24_Greviews extends B24_Class {
 		return $json;
 	}
 
+	function relationsList ($contact_id) {
+		global $b24_webhook;
+		$api_method = 'grewiewscontacts.relations_list?';
+		$api_query = http_build_query([
+			'contact' => $contact_id,
+		]);
+		$json = file_get_contents($b24_webhook.$api_method.$api_query);
+		return $json;
+	}
+
+
+	function taskList ($ids) {
+		global $b24_webhook;
+		$api_method = 'grewiewscontacts.tasks_list?';
+		$api_query = http_build_query([
+			'ids' => $ids,
+		]);
+		$json = file_get_contents($b24_webhook.$api_method.$api_query);
+		return $json;
+	}
+
+	function taskGet ($id) {
+		global $b24_webhook;
+		$api_method = 'grewiewscontacts.task_get?';
+		$api_query = http_build_query([
+			'id' => $id,
+		]);
+		$json = file_get_contents($b24_webhook.$api_method.$api_query);
+		return $json;
+	}
+
 	function taskAdd () {
 		global $b24_webhook;
 		$api_method = 'greviews.task.add?'; 

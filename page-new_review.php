@@ -88,10 +88,10 @@
 			<div class="card">
 				<div class="card-header">
 					<div class="row">
-						<div class="col-lg-4 col-md-6 col-sm-12 text-center">
-							<img v-bind:src="outscraperData.logo" width="200" alt="">
+						<div class="col-lg-3 col-md-4 col-sm-12 text-center">
+							<img v-bind:src="outscraperData.logo" width="50" alt="">
 						</div>
-						<div class="col-lg-8 col-md-6 col-sm-12">
+						<div class="col-lg-9 col-md-8 col-sm-12">
 							<div>
 								<a v-bind:href="outscraperData.site" target="_blank" class="text-decoration-none">
 									<b>{{outscraperData.name}}</b>
@@ -106,7 +106,7 @@
 						</div>
 
 					</div>
-					<div>{{outscraperData.query}}</div>
+					<!-- <div>{{outscraperData.query}}</div> -->
 				</div>
 				<div class="card-body">
 
@@ -138,11 +138,11 @@
 
 					<template v-for="item, index in outscraperData.reviews_data">
 						<div class="row pt-3" v-if="starFilterSet(item.review_rating)">
-							<div class="col-lg-3 col-md-6 col-sm-12">
-								<img v-bind:src="item.author_image" alt="" class="h-100"><br>
+							<div class="col-lg-3 col-md-4 col-sm-4 text-center">
+								<img v-bind:src="item.author_image" alt="" width="100"><br>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12">
-								{{item.review_id}}<br>
+							<div class="col-lg-6 col-md-8 col-sm-8">
+								<!-- {{item.review_id}}<br> -->
 								{{item.author_title}}<br>
 								<span v-for="num in 5" class="text-warning">
 									<template v-if="num <= item.review_rating">
@@ -208,6 +208,7 @@
 		Verbleibende Bewertungen zur Auswahl: {{need.length}}
 	</div>
 
+
 </div>
 
 
@@ -259,6 +260,7 @@
 
 			taskAddFromSite: async function () {
 				$('#preloader-main').css({'display': 'flex'});
+				this.reviewsDataSet();
 				var postData = {
 					taskAddFromSite: 'Y',
 					need: JSON.stringify(this.need),
@@ -273,6 +275,7 @@
 				var response = await $.post(this.ajaxUrl, postData);
 				var rel = await this.relationsAdd(response , '<?php echo $B24_CONTACT->data["ID"];?>');
 				$('#preloader-main').css({'display': 'none'});
+				document.location.href = '/kundenportal/rewiews_in_removal/';
 			},
 
 			relationsAdd: async function (greviews, contact) {
@@ -299,6 +302,16 @@
 				}
 			},
 
+			reviewsDataSet: function () {
+				var arr = [];
+				for (var i = 0; i < this.outscraperData.reviews_data.length; i++) {
+					if (this.need.includes(this.outscraperData.reviews_data[i].review_id)) {
+						arr.push(this.outscraperData.reviews_data[i]);
+					}
+				}
+				this.outscraperData.reviews_data = arr;
+			},
+
 			needAndReasonsSet: function (e) {
 				this.counterCheck(e.target);
 				this.reasons = [];
@@ -316,7 +329,6 @@
 						instance.reasons.push(arr[i].value);
 					}
 				}, 100);
-				
 			},
 
 			requestOutscraper: async function (e) {
