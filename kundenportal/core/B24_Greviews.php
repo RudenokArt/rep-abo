@@ -40,12 +40,16 @@ class B24_Greviews extends B24_Class {
 		return $json;
 	}
 
-	function relationsList ($contact_id) {
+	function relationsList ($contact_id, $check_date=false) {
 		global $b24_webhook;
-		$api_method = 'grewiewscontacts.relations_list?';
-		$api_query = http_build_query([
+		$arr_query = [
 			'contact' => $contact_id,
-		]);
+		];
+		if ($check_date) {
+			$arr_query['check_date'] = $check_date;
+		}
+		$api_method = 'grewiewscontacts.relations_list?';
+		$api_query = http_build_query($arr_query);
 		$json = file_get_contents($b24_webhook.$api_method.$api_query);
 		return $json;
 	}

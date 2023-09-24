@@ -1,4 +1,10 @@
-<?php include_once 'kundenportal/init.php';?>
+<?php  include_once 'kundenportal/init.php';?>
+
+<?php if (sizeof($wellcomeCheck)): ?>
+	<div class="alert alert-info">
+		<p>Herzlichen Glückwunsch, Sie haben bereits Ihren Anspruch auf die Bewertungen dieses Monats geltend gemacht.</p>
+	</div>
+<?php else: ?>
 
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
@@ -379,5 +385,9 @@
 		},
 	}).mount('#google_search-instance');
 </script>
+
+
+<?php endif; ?>
+
 
 <?php include_once 'kundenportal/layout/footer.php'; ?>
