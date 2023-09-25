@@ -4,7 +4,7 @@
 	<div class="alert alert-info">
 		<p>Herzlichen Glückwunsch, Sie haben bereits Ihren Anspruch auf die Bewertungen dieses Monats geltend gemacht.</p>
 	</div>
-<?php else: ?>
+<?php // else: ?>
 
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 

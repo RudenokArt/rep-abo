@@ -40,6 +40,37 @@ class B24_Greviews extends B24_Class {
 		return $json;
 	}
 
+	function dealsList ($greviews_id) {
+		global $b24_webhook;
+		$arr_query = [
+			'filter' => [
+				'%UF_DEAL_GREVIEWS_FIELD' => $greviews_id,
+			],
+			'select' => ['TITLE', 'STAGE_ID', 'DATE_CREATE', 'UF_DEAL_GREVIEWS_FIELD']
+			
+		];
+		// if ($check_date) {
+		// 	$arr_query['check_date'] = $check_date;
+		// }
+		$api_method = 'crm.deal.list?';
+		$api_query = http_build_query($arr_query);
+		$json = file_get_contents($b24_webhook.$api_method.$api_query);
+		return $json;
+	}
+
+	function stageList () {
+		global $b24_webhook;
+		global $dealCategoryId;
+		$arr_query = [
+			'id' => $dealCategoryId,
+			
+		];
+		$api_method = 'crm.dealcategory.stage.list?';
+		$api_query = http_build_query($arr_query);
+		$json = file_get_contents($b24_webhook.$api_method.$api_query);
+		return $json;
+	}
+
 	function relationsList ($contact_id, $check_date=false) {
 		global $b24_webhook;
 		$arr_query = [
@@ -91,4 +122,4 @@ class B24_Greviews extends B24_Class {
 	}
 }
 
-?>
+// UF_DEAL_GREVIEWS_FIELD
