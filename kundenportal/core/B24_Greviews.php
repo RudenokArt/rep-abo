@@ -40,21 +40,18 @@ class B24_Greviews extends B24_Class {
 		return $json;
 	}
 
-	function dealsList ($greviews_id) {
+	function dealsList ($filter, $order, $pageN) {
 		global $b24_webhook;
 		$arr_query = [
-			'filter' => [
-				'%UF_DEAL_GREVIEWS_FIELD' => $greviews_id,
-			],
-			'select' => ['TITLE', 'STAGE_ID', 'DATE_CREATE', 'UF_DEAL_GREVIEWS_FIELD']
-			
+			'filter' => $filter,
+			'select' => ['TITLE', 'STAGE_ID', 'DATE_CREATE', 'UF_DEAL_GREVIEWS_FIELD'],
+			'order' => $order,
+			'start' => $pageN * 50,
 		];
-		// if ($check_date) {
-		// 	$arr_query['check_date'] = $check_date;
-		// }
-		$api_method = 'crm.deal.list?';
+		$api_method = 'crm.deal.list.json?';
 		$api_query = http_build_query($arr_query);
 		$json = file_get_contents($b24_webhook.$api_method.$api_query);
+
 		return $json;
 	}
 
@@ -113,10 +110,10 @@ class B24_Greviews extends B24_Class {
 			'query' => $_POST['googleId'],
 		]);
 
-		// $json = file_get_contents($b24_webhook.$api_method.$api_query);
-		// file_put_contents($_SERVER['DOCUMENT_ROOT'].'/log.json', $json);
+		$json = file_get_contents($b24_webhook.$api_method.$api_query);
+		file_put_contents($_SERVER['DOCUMENT_ROOT'].'/log.json', $json);
 
-		$json = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/log.json');
+		// $json = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/log.json');
 		
 		return $json;
 	}

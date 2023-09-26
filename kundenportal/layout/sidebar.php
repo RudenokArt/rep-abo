@@ -22,11 +22,11 @@
 	Bewertungen in Entfernung
 </a>
 </div>
-<div class="border-bottom">
+<!-- <div class="border-bottom">
 	<a href="#" class="btn btn-lg btn-outline-primary w-100 border-light">
 		Archiv
 	</a>
-</div>
+</div> -->
 <div class="border-bottom">
 	<a href="#" class="btn btn-lg btn-outline-primary w-100 border-light">
 		Rechnungen
